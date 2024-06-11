@@ -23,20 +23,20 @@ boundary Nginx
 control RPCService
 control RESTService
 control SOAPService
-database PostgreSQL
+database EgaProDatastore
 
 Client -> Nginx: Requête (SIREN)
 Nginx -> RPCService: Rediriger vers RPC (si applicable)
 Nginx -> RESTService: Rediriger vers REST (si applicable)
 Nginx -> SOAPService: Rediriger vers SOAP (si applicable)
 
-RPCService -> PostgreSQL: SELECT data FROM egapro WHERE siren = ?
-RESTService -> PostgreSQL: SELECT data FROM egapro WHERE siren = ?
-SOAPService -> PostgreSQL: SELECT data FROM egapro WHERE siren = ?
+RPCService -> EgaProDatastore: SELECT data FROM egapro WHERE siren = ?
+RESTService -> EgaProDatastore: SELECT data FROM egapro WHERE siren = ?
+SOAPService -> EgaProDatastore: SELECT data FROM egapro WHERE siren = ?
 
-PostgreSQL -> RPCService: Retourner les données
-PostgreSQL -> RESTService: Retourner les données
-PostgreSQL -> SOAPService: Retourner les données
+EgaProDatastore -> RPCService: Retourner les données
+EgaProDatastore -> RESTService: Retourner les données
+EgaProDatastore -> SOAPService: Retourner les données
 
 RPCService -> Nginx: Retourner les données
 RESTService -> Nginx: Retourner les données
